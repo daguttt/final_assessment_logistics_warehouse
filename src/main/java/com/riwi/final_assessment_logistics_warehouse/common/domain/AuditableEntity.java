@@ -29,21 +29,21 @@ import lombok.experimental.SuperBuilder;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public abstract class AuditableEntity {
-  @CreatedDate
-  @Column(nullable = false, updatable = false, columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6)")
-  @Builder.Default
-  private LocalDateTime createdAt = LocalDateTime.now();
+    @CreatedDate
+    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6)")
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-  @LastModifiedDate
-  @Column(columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6)")
-  @Builder.Default
-  private LocalDateTime modifiedAt = LocalDateTime.now();
+    @LastModifiedDate
+    @Column(columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6)")
+    @Builder.Default
+    private LocalDateTime modifiedAt = LocalDateTime.now();
 
-  @CreatedBy
-  @OneToOne
-  private UserEntity createdBy;
+    @CreatedBy
+    @OneToOne
+    private UserEntity createdBy;
 
-  @LastModifiedBy
-  @OneToOne
-  private UserEntity modifiedBy;
+    @LastModifiedBy
+    @OneToOne
+    private UserEntity modifiedBy;
 }
