@@ -16,7 +16,7 @@ import com.riwi.final_assessment_logistics_warehouse.users.domain.UserEntity;
 import com.riwi.final_assessment_logistics_warehouse.users.domain.UserRepository;
 
 @Component
-public class UserSeeder implements ApplicationRunner {
+public class UsersSeeder implements ApplicationRunner {
 
     @Value("${spring.mail.username}")
     private String mailUsername;
