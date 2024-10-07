@@ -12,8 +12,8 @@ import com.riwi.final_assessment_logistics_warehouse.users.domain.UserEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,10 +40,10 @@ public abstract class AuditableEntity {
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @CreatedBy
-    @OneToOne
+    @ManyToOne
     private UserEntity createdBy;
 
     @LastModifiedBy
-    @OneToOne
+    @ManyToOne
     private UserEntity modifiedBy;
 }
