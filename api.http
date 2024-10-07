@@ -9,10 +9,10 @@ POST {{host}}/auth/register  HTTP/1.1
 Content-Type: application/json
 
 {
-  "fullname": "Antony",
-  "email": "antony@gmail.com",
-  "password": "Antony12345*",
-  "role": "ADMIN"
+  "fullname": "John",
+  "email": "john@gmail.com",
+  "password": "John12345*",
+  "role": "USER"
 }
 
 ### 
