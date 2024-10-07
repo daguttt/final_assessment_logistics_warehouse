@@ -35,9 +35,9 @@ public class RegisterUserDto {
                         message = "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character")
         private String password;
 
-        @Schema(example = "TRANSPORTER", description = "Role of the user", implementation = Roles.class)
+        @Schema(example = "CARRIER", description = "Role of the user", implementation = Roles.class)
         @NotBlank(message = "Role cannot be blank")
-        @ValidEnum(enumClass = Roles.class, message = "Role must be either 'ADMIN' or 'TRANSPORTER'")
+        @ValidEnum(enumClass = Roles.class, message = "Role must be either 'ADMIN' or 'CARRIER'")
         private String role;
 
 }
