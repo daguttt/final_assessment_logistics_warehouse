@@ -39,7 +39,7 @@ Authorization: Bearer {{token}}
 {
   "maxWeight": 5.0,
   "location": "Warehouse B"
-  }
+}
 
 
 ### -***********************************************-
