@@ -38,7 +38,7 @@ public class PalletEntity extends AuditableEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @Builder.Default
-    private PaletStates state = PaletStates.AVAILABLE;
+    private PalletStates state = PalletStates.AVAILABLE;
 
     @Column(nullable = false)
     private String location;

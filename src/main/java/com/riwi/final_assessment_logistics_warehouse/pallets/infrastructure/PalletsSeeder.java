@@ -9,7 +9,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.riwi.final_assessment_logistics_warehouse.pallets.domain.PaletStates;
+import com.riwi.final_assessment_logistics_warehouse.pallets.domain.PalletStates;
 import com.riwi.final_assessment_logistics_warehouse.pallets.domain.PalletEntity;
 import com.riwi.final_assessment_logistics_warehouse.pallets.domain.PalletRepository;
 import com.riwi.final_assessment_logistics_warehouse.users.domain.UserEntity;
@@ -49,7 +49,7 @@ public class PalletsSeeder implements ApplicationRunner {
         // Create initial palets
         for (int i = 1; i <= 5; i++) {
             PalletEntity paletEntity = PalletEntity.builder().maxWeight(10.0 * i).currentWeight(0.0)
-                    .state(PaletStates.AVAILABLE).location("warehouse").build();
+                    .state(PalletStates.AVAILABLE).location("warehouse").build();
             paletEntity.setCreatedBy(admin);
             paletEntity.setModifiedBy(admin);
             this.paletRepository.save(paletEntity);
