@@ -1,4 +1,4 @@
-package com.riwi.final_assessment_logistics_warehouse.palets.infrastructure;
+package com.riwi.final_assessment_logistics_warehouse.pallets.infrastructure;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,22 +9,22 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.riwi.final_assessment_logistics_warehouse.palets.domain.PaletEntity;
-import com.riwi.final_assessment_logistics_warehouse.palets.domain.PaletRepository;
-import com.riwi.final_assessment_logistics_warehouse.palets.domain.PaletStates;
+import com.riwi.final_assessment_logistics_warehouse.pallets.domain.PaletStates;
+import com.riwi.final_assessment_logistics_warehouse.pallets.domain.PalletEntity;
+import com.riwi.final_assessment_logistics_warehouse.pallets.domain.PalletRepository;
 import com.riwi.final_assessment_logistics_warehouse.users.domain.UserEntity;
 import com.riwi.final_assessment_logistics_warehouse.users.domain.UserRepository;
 
 @Component
 @Order(2)
-public class PaletsSeeder implements ApplicationRunner {
+public class PalletsSeeder implements ApplicationRunner {
     @Value("${spring.mail.username}")
     private String mailUsername;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private PaletRepository paletRepository;
+    private PalletRepository paletRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -48,7 +48,7 @@ public class PaletsSeeder implements ApplicationRunner {
 
         // Create initial palets
         for (int i = 1; i <= 5; i++) {
-            PaletEntity paletEntity = PaletEntity.builder().maxWeight(10.0 * i).currentWeight(0.0)
+            PalletEntity paletEntity = PalletEntity.builder().maxWeight(10.0 * i).currentWeight(0.0)
                     .state(PaletStates.AVAILABLE).location("warehouse").build();
             paletEntity.setCreatedBy(admin);
             paletEntity.setModifiedBy(admin);
