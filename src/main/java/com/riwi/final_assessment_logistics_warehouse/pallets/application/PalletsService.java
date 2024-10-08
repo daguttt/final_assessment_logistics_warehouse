@@ -22,6 +22,10 @@ public class PalletsService {
         return this.palletRepository.findAll();
     }
 
+    public PalletEntity getPalletById(Long id) {
+        return this.findPalletById(id);
+    }
+
     public PalletEntity create(CreatePalletDto createPalletDto) {
         PalletEntity palletEntity = PalletEntity.builder().maxWeight(createPalletDto.getMaxWeight())
                 .location(createPalletDto.getLocation()).build();

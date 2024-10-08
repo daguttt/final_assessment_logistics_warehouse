@@ -12,6 +12,7 @@ import com.riwi.final_assessment_logistics_warehouse.pallets.infrastructure.dtos
 import com.riwi.final_assessment_logistics_warehouse.pallets.infrastructure.dtos.response.DeletedPalletResponseDto;
 import com.riwi.final_assessment_logistics_warehouse.pallets.infrastructure.dtos.response.PalletDto;
 import com.riwi.final_assessment_logistics_warehouse.pallets.infrastructure.dtos.response.PalletsResponseDto;
+import com.riwi.final_assessment_logistics_warehouse.pallets.infrastructure.dtos.response.SinglePalletResponseDto;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -31,7 +32,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Tag(name = "Pallets management")
 @RestController
@@ -77,8 +77,14 @@ public class PalletsController {
     }
 
     @GetMapping("/{id}")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
+    public ResponseEntity<SinglePalletResponseDto> getPalletById(@PathVariable Long id) {
+        var palletEntity = this.palletsService.getPalletById(id);
+        var palletDto = palletEntityToPalletDto(palletEntity);
+
+        var httpStatus = HttpStatus.OK.value();
+        SinglePalletResponseDto singlePalletResponseDto = SinglePalletResponseDto.builder().status(httpStatus)
+                .message("Pallet fetched successfully").data(palletDto).build();
+        return ResponseEntity.status(httpStatus).body(singlePalletResponseDto);
     }
 
     @PutMapping("/{id}")
