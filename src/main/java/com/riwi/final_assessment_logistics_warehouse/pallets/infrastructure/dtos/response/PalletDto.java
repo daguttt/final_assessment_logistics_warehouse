@@ -1,6 +1,6 @@
 package com.riwi.final_assessment_logistics_warehouse.pallets.infrastructure.dtos.response;
 
-import com.riwi.final_assessment_logistics_warehouse.pallets.domain.PaletStates;
+import com.riwi.final_assessment_logistics_warehouse.pallets.domain.PalletStates;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +15,6 @@ public class PalletDto {
     private Long id;
     private Double maxWeight;
     private Double currentWeight;
-    private PaletStates state;
+    private PalletStates state;
     private String location;
 }
