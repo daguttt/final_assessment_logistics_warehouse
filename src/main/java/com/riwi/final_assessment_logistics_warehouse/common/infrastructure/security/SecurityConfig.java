@@ -22,9 +22,9 @@ import com.riwi.final_assessment_logistics_warehouse.users.domain.Roles;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String[] PUBLIC_ENDPOINTS = { "/auth/**", "/swagger-ui/**", "/api-docs/v3/**", "/tasks/**",
-            "/demos/**" };
-    private final String[] ADMIN_ENDPOINTS = { "/projects/**" };
+    private final String[] PUBLIC_ENDPOINTS = { "/auth/**", "/swagger-ui/**", "/api-docs/v3/**" };
+    private final String[] CARRIER_ENDPOINTS = { "/loads/**" };
+    private final String[] ADMIN_ENDPOINTS = { "/pallets/**", "/loads/**" };
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -55,8 +55,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(request -> request.requestMatchers(PUBLIC_ENDPOINTS).permitAll()
-                        .requestMatchers(ADMIN_ENDPOINTS).hasAuthority(Roles.ADMIN.name()).anyRequest().authenticated())
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(PUBLIC_ENDPOINTS).permitAll().requestMatchers(ADMIN_ENDPOINTS)
+                        .hasAuthority(Roles.ADMIN.name()).requestMatchers(CARRIER_ENDPOINTS)
+                        .hasAuthority(Roles.CARRIER.name()).anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
                 .sessionManagement(
                         sessionManager -> sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
