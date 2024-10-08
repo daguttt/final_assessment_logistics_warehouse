@@ -1,7 +1,7 @@
-# Riwi Projects System
+# Logistics Warehouse API
 ## Descripción
 
-REST API to manage projects and tasks.
+REST API to manage pallets and loads in a warehouse.
 
 # Repository URL
 https://github.com/daguttt/final_assessment_logistics_warehouse
