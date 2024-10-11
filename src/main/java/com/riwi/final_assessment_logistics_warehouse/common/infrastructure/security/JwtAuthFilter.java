@@ -2,8 +2,6 @@ package com.riwi.final_assessment_logistics_warehouse.common.infrastructure.secu
 
 import java.io.IOException;
 
-import com.riwi.final_assessment_logistics_warehouse.common.infrastructure.security.JwtUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.filter.OncePerRequestFilter;
