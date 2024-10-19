@@ -9,6 +9,16 @@
       "name": "jwt.expiration-time",
       "type": "java.lang.Long",
       "description": "The JWT's expiration time in miliseconds"
+    },
+    {
+      "name": "seeders.users.admin-user.email",
+      "type": "java.lang.String",
+      "description": "The email of the default admin user"
+    },
+    {
+      "name": "seeders.users.admin-user.password",
+      "type": "java.lang.String",
+      "description": "The password of the default admin user. It should follow the password policy. Check the `RegisterUserDto` class for more details"
     }
   ]
 }
