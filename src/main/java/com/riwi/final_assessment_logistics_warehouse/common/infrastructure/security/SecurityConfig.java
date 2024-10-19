@@ -13,8 +13,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
 
 import com.riwi.final_assessment_logistics_warehouse.users.domain.Roles;
 
@@ -22,7 +23,7 @@ import com.riwi.final_assessment_logistics_warehouse.users.domain.Roles;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String[] PUBLIC_ENDPOINTS = { "/auth/**", "/swagger-ui/**", "/api-docs/v3/**" };
+    private final String[] PUBLIC_ENDPOINTS = { "/auth/**", "/swagger-ui/**", "/api-docs/v3/**", "/error" };
     private final String[] CARRIER_ENDPOINTS = { "/loads/**" };
     private final String[] ADMIN_ENDPOINTS = { "/pallets/**", "/loads/**" };
 
@@ -31,6 +32,9 @@ public class SecurityConfig {
 
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
+
+    @Autowired
+    private AuthenticationEntryPoint http401UnauthorizedEntryPoint;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -59,9 +63,11 @@ public class SecurityConfig {
                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll().requestMatchers(ADMIN_ENDPOINTS)
                         .hasAuthority(Roles.ADMIN.name()).requestMatchers(CARRIER_ENDPOINTS)
                         .hasAuthority(Roles.CARRIER.name()).anyRequest().authenticated())
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(http401UnauthorizedEntryPoint))
                 .sessionManagement(
                         sessionManager -> sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(this.jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
+                .addFilterBefore(this.jwtAuthFilter, AuthorizationFilter.class).build();
     }
 
 }
