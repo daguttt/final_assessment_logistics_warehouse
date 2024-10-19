@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.security.SignatureException;
 
 @RestControllerAdvice
 public class SecurityExceptionHandler {
@@ -19,5 +21,15 @@ public class SecurityExceptionHandler {
     @ExceptionHandler(ExpiredJwtException.class)
     public ProblemDetail handleExpiredJwtException(ExpiredJwtException exception) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, "Token expired");
+    }
+
+    @ExceptionHandler(MalformedJwtException.class)
+    public ProblemDetail handleMalformedJwtException(MalformedJwtException exception) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, "Token not supported");
+    }
+
+    @ExceptionHandler(SignatureException.class)
+    public ProblemDetail handleSignatureException(SignatureException exception) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, "Invalid token signature");
     }
 }
