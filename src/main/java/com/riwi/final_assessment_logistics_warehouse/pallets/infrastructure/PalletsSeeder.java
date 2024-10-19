@@ -18,8 +18,8 @@ import com.riwi.final_assessment_logistics_warehouse.users.domain.UserRepository
 @Component
 @Order(2)
 public class PalletsSeeder implements ApplicationRunner {
-    @Value("${spring.mail.username}")
-    private String mailUsername;
+    @Value("${seeders.users.admin-user.email}")
+    private String adminUserEmail;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -43,7 +43,7 @@ public class PalletsSeeder implements ApplicationRunner {
         }
 
         // Get user admin to set audit for palets
-        UserEntity admin = this.userRepository.findByEmail(this.mailUsername)
+        UserEntity admin = this.userRepository.findByEmail(this.adminUserEmail)
                 .orElseThrow(() -> new RuntimeException("Admin user not found"));
 
         // Create initial palets

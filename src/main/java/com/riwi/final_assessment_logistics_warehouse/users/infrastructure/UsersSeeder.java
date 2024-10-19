@@ -20,11 +20,11 @@ import com.riwi.final_assessment_logistics_warehouse.users.domain.UserRepository
 @Order(1)
 public class UsersSeeder implements ApplicationRunner {
 
-    @Value("${spring.mail.username}")
-    private String mailUsername;
+    @Value("${seeders.users.admin-user.email}")
+    private String adminUserEmail;
 
-    @Value("${spring.mail.password}")
-    private String mailPassword;
+    @Value("${seeders.users.admin-user.password}")
+    private String adminUserPassword;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -40,7 +40,7 @@ public class UsersSeeder implements ApplicationRunner {
         logger.info("Seeding users");
 
         // Check if initial admin user exists
-        Optional<UserEntity> foundUser = userRepository.findByEmail(this.mailUsername);
+        Optional<UserEntity> foundUser = userRepository.findByEmail(this.adminUserEmail);
 
         if (foundUser.isPresent()) {
             logger.info("User with email '{}' already exists", foundUser.get().getEmail());
@@ -50,8 +50,8 @@ public class UsersSeeder implements ApplicationRunner {
         }
 
         // Create initial admin user
-        var encodedPassword = this.passwordEncoder.encode(mailPassword);
-        var userEntity = UserEntity.builder().fullname("admin").email(this.mailUsername).password(encodedPassword)
+        var encodedPassword = this.passwordEncoder.encode(adminUserPassword);
+        var userEntity = UserEntity.builder().fullname("admin").email(this.adminUserEmail).password(encodedPassword)
                 .role(Roles.ADMIN).build();
         userEntity.setCreatedBy(userEntity);
         userEntity.setModifiedBy(userEntity);
