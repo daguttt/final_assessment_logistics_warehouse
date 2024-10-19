@@ -41,6 +41,12 @@ Authorization: Bearer {{token}}
   "location": "Warehouse B"
 }
 
+###
+
+# Get all pallets
+GET {{host}}/pallets HTTP/1.1
+Authorization: Bearer {{token}}
+
 
 ### -***********************************************-
 
