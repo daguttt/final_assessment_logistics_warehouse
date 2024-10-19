@@ -59,7 +59,6 @@ public class SecurityConfig {
                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll().requestMatchers(ADMIN_ENDPOINTS)
                         .hasAuthority(Roles.ADMIN.name()).requestMatchers(CARRIER_ENDPOINTS)
                         .hasAuthority(Roles.CARRIER.name()).anyRequest().authenticated())
-                .authenticationProvider(authenticationProvider())
                 .sessionManagement(
                         sessionManager -> sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(this.jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
