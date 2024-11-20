@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -51,7 +52,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-            if (userEmail != null && authentication == null) {
+            if (userEmail != null && authentication.getClass() == AnonymousAuthenticationToken.class) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
                 if (this.jwtUtils.isTokenValid(jwt, userDetails)) {
